@@ -1,4 +1,4 @@
-[English](README.md)
+**[English](README.md)
 
 # VoiceTalk 对讲机(AI Passport 应用)
 
@@ -68,3 +68,4 @@ SERVER_HERE 是服务器应答,AUDIO / AUDIO_END 是语音。有密码的房间�
 产物 `build/FoloToy-AI-Passport-full.bin` 从 `0x0` 刷写即可(内含 bootloader、
 分区表与应用)。字体覆盖由 `tests/test_app_font_coverage.py` 把关:界面里出现
 的汉字必须都在 `assets/fonts/app_font_symbols.txt` 里,否则刷到屏上会变方框。
+**
