@@ -1,4 +1,3 @@
-[CONTRIBUTING.zh_CN.md](https://github.com/user-attachments/files/33911794/CONTRIBUTING.zh_CN.md)
 [English](/.github/CONTRIBUTING.md) | 简体中文
 
 # 贡献指南
