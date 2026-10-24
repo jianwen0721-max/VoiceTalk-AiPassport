@@ -2,7 +2,7 @@
   <strong>简体中文</strong> · <a href="README.md">English</a>  
 </p>
 
-# VoiceTalk 对讲机(FoloToy AI Passport 应用)
+# VoiceTalk (FoloToy AI Passport 应用)
 
 <p align="center">  
   <a href="/LICENSE"><img src="https://img.shields.io/badge/许可证-MIT-64748b?style=flat-square" alt="MIT 许可证"></a>  
