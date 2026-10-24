@@ -1,69 +1,81 @@
+[简体中文](README.zh_CN.md)
 
-# VoiceTalk 对讲机(AI Passport 应用)
+# VoiceTalk Intercom (AI Passport application)
 
-把 AI Passport 变成一台房间对讲机:同一个 6 位房号里的设备按住 OK 就能说话,
-半双工(同一时刻只有一个人发话,所以对讲不回声、不啸叫)。局域网内可以直接
-互通;填一台中转服务器后,跨互联网也能通。
+Turns the AI Passport into a room intercom: devices that share a 6-digit room  
+number talk by holding OK. It is half duplex on purpose - only one person speaks  
+at a time, so there is no echo and no feedback howl. Devices on the same LAN  
+reach each other directly; with a relay server configured they also reach each  
+other across the internet.
 
-## 界面与按键
+## Screens and keys
 
-三页,硬派三键操作:
+Three screens, three keys:
 
-| 页面 | 怎么进 | 按键 |
-| --- | --- | --- |
-| 通话页 | 开机默认 | 按住 OK 发话,松开结束;短按 UP 进设置;短按 DOWN 看成员 |
-| 成员页 | 通话页按 DOWN | 短按任意键回通话页 |
-| 设置页 | 通话页按 UP | UP/DOWN 移动,OK 进入编辑或执行;编辑态 UP/DOWN 改值,再按 OK 保存 |
+| Screen   | How to reach it         | Keys                                                                                  |
+| -------- | ----------------------- | ------------------------------------------------------------------------------------- |
+| Talk     | default at boot         | hold OK to talk, release to stop; short UP opens settings; short DOWN shows members   |
+| Members  | DOWN on the talk screen | any short press returns to talk                                                       |
+| Settings | UP on the talk screen   | UP/DOWN moves, OK edits or runs; while editing UP/DOWN changes the value and OK saves |
 
-通话页从上到下是:房号(主视觉)、链路色带(互联网中转 / 局域网,通不通)、
-电平条(发话时取麦克风峰值,收听时取播放帧峰值,不是装饰动画)、状态字、
-发话区。设置页里的亮度/音量可以改,传输方式、中转服务器地址、还原出厂值
-也在里面;服务器地址只能显示,要改请走网页(三个键敲不进域名)。
+The talk screen reads top to bottom: room number (the hero element), a link  
+ribbon (internet relay or LAN, and whether it is up), a level meter driven by  
+real audio peaks - the microphone while talking, the played frame while  
+listening, not decorative animation - a status line, and the talk area. Settings  
+exposes brightness, volume, transport mode, the relay server address and the  
+factory reset. The server address is display-only: a domain cannot be typed with  
+three buttons, so it is edited on the web page.
 
-## 网页设置(配 Wi-Fi 与房号)
+## Web setup (Wi-Fi and room)
 
-1. 设置页选「打开网页设置」,设备开一个开放热点 `VoiceTalk-XXXX`;
-2. 手机连上这个热点,浏览器打开 `http://192.168.4.1`;
-3. 填使用者名称、6 位房号、4 位房间密码(留空 = 开放房间)、要连的 Wi-Fi、
-   以及中转服务器地址与端口;
-4. 保存后设备自动重启生效。
+1. Pick "open web setup" on the settings screen; the device opens an open AP  
+   named `VoiceTalk-XXXX`.
+2. Join that AP from a phone and browse to `http://192.168.4.1`.
+3. Fill in your name, the 6-digit room, a 4-digit room password (empty means an  
+   open room), the Wi-Fi to join, and the relay server host and port.
+4. Saving reboots the device.
 
-## 互联网通话
+## Calling over the internet
 
-设备本身不知道服务器的地址 —— 地址在网页里填,可以是域名(如
-`voice.example.com`)也可以是 IP。设备每 30 秒重新解析一次域名(DDNS 换 IP
-也能跟上),每 3 秒发一个探活包;这个探活包同时是 NAT 保活:设备一直在发,
-家用路由器才一直留着那条 UDP 映射,服务器转回来的语音才进得来。
+The firmware has no hard-coded server address - it comes from the web page and  
+may be a domain (for example `voice.example.com`) or an IP. The device  
+re-resolves the name every 30 s (so a DDNS change is picked up) and probes every  
+3 s. That probe doubles as NAT keepalive: while the device keeps sending, a home  
+router keeps the UDP mapping, so relayed audio can come back in.
 
-填了地址但解析不出来时,设备会把状态显示成「地址解析失败」并**自动退回局域网
-广播**,通话不会断,只是跨不了公网。不填地址则完全等同于纯局域网模式。
+If the name does not resolve, the device reports "address resolution failed" and  
+**falls back to LAN broadcast** - calls keep working, they just cannot cross the  
+public internet. Leaving the address empty is exactly the pure-LAN mode.
 
-服务器上跑仓库自带的 [`tools/voice_relay_server.py`](../../../tools/voice_relay_server.py):
+Run the bundled [`tools/voice_relay_server.py`](../../../tools/voice_relay_server.py)  
+on the server:
 
 ```bash
 python3 tools/voice_relay_server.py --port 8801 --passcode 2580
 ```
 
-公网部署要点(详见脚本顶部注释):放通 **UDP** 端口;`--passcode` 一定要设,
-服务器会用与固件相同的算法校验房间密钥,密钥不对的设备进不了房间;带宽按
-人头线性增长,一个人说话约 17 KB/s 上行。线路包没有加密,别在上面说不能被
-机房听到的话。
+For a public deployment (see the header comment in that script): open the **UDP**  
+port, always pass `--passcode` so the server can verify room keys with the same  
+algorithm the firmware uses, and budget about 17 KB/s upstream per speaker.  
+Frames are scrambled, not encrypted - do not treat the relay as a private line.
 
-## 协议
+## Protocol
 
-`main/app_protocol.h` 定义的 16 字节大端头(`VT` magic + 版本 + 类型 +
-房号 + sender + 序号 + 长度 + flags),8 kHz / 16 bit / 单声道、20 ms 一帧
-(320 字节)。HELLO 是上线兼心跳(2 秒一发),DISCOVER 找服务器,
-SERVER_HERE 是服务器应答,AUDIO / AUDIO_END 是语音。有密码的房间会把 PCM
-用房间密钥加扰 —— 目的是让密码不对的人听不懂,不是加密学意义的加密。
+`main/app_protocol.h` defines a 16-byte big-endian header (`VT` magic, version,  
+type, room, sender, sequence, length, flags) over 8 kHz / 16-bit mono audio in  
+20 ms frames (320 bytes). HELLO joins and heartbeats every 2 s, DISCOVER looks  
+for a server, SERVER_HERE answers it, AUDIO and AUDIO_END carry speech. Rooms  
+with a password scramble the PCM with the room key - enough that a wrong  
+password sounds like noise, not encryption.
 
-## 构建与刷写
+## Build and flash
 
 ```bash
-./tools/validate.sh --static     # 仓库检查 + 主机测试
-./tools/validate.sh --firmware   # 编译 + 生成 0x0 合并固件
+./tools/validate.sh --static     # repository checks plus host tests
+./tools/validate.sh --firmware   # build plus the merged 0x0 image
 ```
 
-产物 `build/FoloToy-AI-Passport-full.bin` 从 `0x0` 刷写即可(内含 bootloader、
-分区表与应用)。字体覆盖由 `tests/test_app_font_coverage.py` 把关:界面里出现
-的汉字必须都在 `assets/fonts/app_font_symbols.txt` 里,否则刷到屏上会变方框。
+`build/FoloToy-AI-Passport-full.bin` flashes from `0x0` and contains the  
+bootloader, the partition table and the application. `tests/test_app_font_coverage.py`  
+keeps the UI honest: every Chinese character drawn on screen must exist in  
+`assets/fonts/app_font_symbols.txt`, otherwise it renders as a blank box.
