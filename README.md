@@ -2,7 +2,7 @@
   <a href="README.zh_CN.md">简体中文</a> · <strong>English</strong>  
 </p>
 
-# VoiceTalk for FoloToy AI Passport
+# VoiceTalk Intercom for FoloToy AI Passport
 
 <p align="center">  
   <a href="/LICENSE"><img src="https://img.shields.io/badge/License-MIT-64748b?style=flat-square" alt="MIT License"></a>  
@@ -25,6 +25,24 @@ Wi-Fi credentials, room number, room password and the relay server are all set
 from a phone browser on the device's own access point. There is no companion app  
 to install, and the device never asks you to type a domain name with three  
 buttons.
+
+## Screens
+
+<p align="center">  
+  <img src="/docs/assets/screenshots/01-talk-screen.png" alt="Talk screen" width="240">  
+  <img src="/docs/assets/screenshots/02-settings-screen.png" alt="Settings screen" width="240">  
+  <img src="/docs/assets/screenshots/03-web-setup.png" alt="Web setup page" width="240">  
+</p>
+
+<p align="center">  
+  Talk screen · Settings screen · Phone-side web setup  
+</p>
+
+> **Note:** the two device renders are produced from the real product photo in  
+> `docs/brand/`, and the screen content follows the actual layout, colors and  
+> on-screen strings in `main/app_ui.c` and `main/app_web.c`. They are AI mockups  
+> of the real hardware, not photographs of a running device. The physical screen  
+> is 240 x 320.
 
 ## Hardware
 
