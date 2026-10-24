@@ -2,7 +2,7 @@
   <a href="README.zh_CN.md">简体中文</a> · <strong>English</strong>  
 </p>
 
-# VoiceTalk Intercom for FoloToy AI Passport
+# VoiceTalk for FoloToy AI Passport
 
 <p align="center">  
   <a href="/LICENSE"><img src="https://img.shields.io/badge/License-MIT-64748b?style=flat-square" alt="MIT License"></a>  
