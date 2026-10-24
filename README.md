@@ -1,5 +1,3 @@
-[README.zh_CN.md](https://github.com/user-attachments/files/33910713/README.zh_CN.md)
-[English](README.md)
 
 # VoiceTalk 对讲机(AI Passport 应用)
 
