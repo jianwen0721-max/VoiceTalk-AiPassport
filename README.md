@@ -1,10 +1,11 @@
-
+[README.zh_CN.md](https://github.com/user-attachments/files/33910713/README.zh_CN.md)
 [English](README.md)
 
 # VoiceTalk 对讲机(AI Passport 应用)
 
 把 AI Passport 变成一台房间对讲机:同一个 6 位房号里的设备按住 OK 就能说话,
-半双工(同一时刻只有一个人发话,所以对讲不回声、不啸叫)。局域网内可以直接互通;填一台中转服务器后,跨互联网也能通。
+半双工(同一时刻只有一个人发话,所以对讲不回声、不啸叫)。局域网内可以直接
+互通;填一台中转服务器后,跨互联网也能通。
 
 ## 界面与按键
 
