@@ -1,0 +1,60 @@
+VoiceTalk Intercom for FoloToy AI Passport
+Copyright (c) 2026 FoloToy
+Copyright (c) 2026 VoiceTalk Intercom contributors
+
+This product is a derivative work of FoloToy/ai-passport
+(https://github.com/FoloToy/ai-passport), distributed under the MIT License.
+It includes software and assets from the following third-party projects. Their
+licenses apply to those portions and are reproduced or referenced below.
+
+--------------------------------------------------------------------------------
+ESP-IDF (Espressif IoT Development Framework)
+    https://github.com/espressif/esp-idf
+    Substantially Apache License 2.0; some components are MIT, BSD, or other
+    permissive licenses. See $IDF_PATH/licenses and each component's own
+    LICENSE file. Binary components (Wi-Fi, Bluetooth, PHY) are provided under
+    the Espressif proprietary license terms described there.
+    Target version for this project: v5.5.3.
+
+LVGL - Light and Versatile Graphics Library
+    https://github.com/lvgl/lvgl
+    Copyright (c) 2018-2025 LVGL Kft and contributors.
+    MIT License.
+
+esp_lvgl_port (Espressif component)
+    https://github.com/espressif/esp-bsp/tree/master/components/esp_lvgl_port
+    MIT License (component: espressif/esp_lvgl_port).
+
+esp_codec_dev (Espressif component)
+    https://github.com/espressif/esp-adf-libs
+    MIT License (component: espressif/esp_codec_dev).
+
+button (Espressif component)
+    https://github.com/espressif/esp-adf-libs
+    MIT License (component: espressif/button).
+
+cmake_utilities (Espressif component)
+    https://github.com/espressif/cmake_utilities
+    MIT License (component: espressif/cmake_utilities).
+
+Noto Sans SC (Chinese glyph subset)
+    https://fonts.google.com/noto/specimen/Noto+Sans+SC
+    Copyright (c) Google LLC and contributors.
+    SIL Open Font License 1.1 (OFL-1.1). Only a generated subset covering the
+    characters used by this application is embedded
+    (assets/fonts/app_font_16.c, generated from assets/fonts/app_font_symbols.txt).
+    The OFL-1.1 text is available at https://openfontlicense.org/.
+    Reserved font name: Noto Sans SC.
+
+Montserrat (LVGL built-in fonts)
+    https://github.com/JulietaUla/Montserrat
+    Copyright (c) 2011 Julieta Ulanovsky.
+    SIL Open Font License 1.1 (OFL-1.1).
+
+--------------------------------------------------------------------------------
+Managed components are fetched at build time by the ESP-IDF Component Manager and
+are NOT redistributed in this repository; see dependencies.lock for the exact
+resolved versions. The fonts listed above are embedded in the firmware image.
+
+No part of this notice modifies the MIT License under which this repository is
+distributed.
