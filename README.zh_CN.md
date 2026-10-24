@@ -2,7 +2,7 @@
   <strong>简体中文</strong> · <a href="README.md">English</a>  
 </p>
 
-# VoiceTalk (FoloToy AI Passport 应用)
+# VoiceTalk 对讲机(FoloToy AI Passport 应用)
 
 <p align="center">  
   <a href="/LICENSE"><img src="https://img.shields.io/badge/许可证-MIT-64748b?style=flat-square" alt="MIT 许可证"></a>  
@@ -22,6 +22,22 @@ VoiceTalk 把 [FoloToy AI Passport](https://github.com/FoloToy/ai-passport) 变�
 
 Wi-Fi 密码、房号、房间密码和中转服务器都在设备自己开的热点里用手机浏览器配置。  
 不用装 App,也不用拿三个键去敲一个域名。
+
+## 界面
+
+<p align="center">  
+  <img src="/docs/assets/screenshots/01-talk-screen.png" alt="通话页" width="240">  
+  <img src="/docs/assets/screenshots/02-settings-screen.png" alt="设置页" width="240">  
+  <img src="/docs/assets/screenshots/03-web-setup.png" alt="网页设置页" width="240">  
+</p>
+
+<p align="center">  
+  通话页 · 设置页 · 手机端网页设置  
+</p>
+
+> **说明:** 两张设备图以 `docs/brand/` 里的真机产品照为底图绘制,屏上内容依据  
+> `main/app_ui.c` 与 `main/app_web.c` 里真实的排版、配色与文案。它们是真机外观的  
+> AI 示意图,不是在运行设备的实拍照片。设备屏幕是 240 × 320。
 
 ## 硬件
 
